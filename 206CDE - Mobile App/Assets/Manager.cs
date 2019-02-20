@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
@@ -14,6 +15,23 @@ public class Manager : MonoBehaviour
     GameObject currentGameObject;
     bool loginCreds;
 
+    public string[] users;
+    string thisFirstName;
+    string thisSurname;
+    string thisCourse;
+    string thisSsid;
+    string thisClassId;
+
+    int UserNumber;
+
+    TextMeshProUGUI NameText;
+    TextMeshProUGUI CourseText;
+    TextMeshProUGUI SSIDText;
+
+    Transform nameObject;
+    Transform courseObject;
+    Transform ssidObject;
+
 
     // - - //
 
@@ -21,9 +39,12 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Turns off the buttons on game start
+        // Turns off the buttons on app start
         buttonsParent.SetActive(false);
+        //Sets the current gameobject to be the login page.
         currentGameObject = loginPage;
+
+        StartCoroutine(LoadData());
     }
 
     // Check to see if the user's credentials are correct
@@ -69,5 +90,58 @@ public class Manager : MonoBehaviour
         currentGameObject.SetActive(false);
         reportLostStickerPage.SetActive(true);
         currentGameObject = reportLostStickerPage;
+    }
+
+    IEnumerator LoadData()
+    {
+        WWW userData = new WWW("http://localhost/realworldproject/userdata.php");
+        yield return userData;
+
+        string userDataString = userData.text;
+
+        Debug.Log(userDataString);
+        users = userDataString.Split(';');
+        
+        Debug.Log(GetThisUserData(users[0], "Class_ID:"));
+
+        UserNumber = 0;
+
+        thisFirstName = GetThisUserData(users[UserNumber], "First name:");
+        thisSsid = GetThisUserData(users[UserNumber], "SSID:");
+        thisCourse = GetThisUserData(users[UserNumber], "Course:");
+        thisClassId = GetThisUserData(users[UserNumber], "Class_ID:");
+
+        //Debug.Log(thisFirstName + thisSsid + thisCourse + thisClassId);
+
+        SetText(thisFirstName, thisCourse, thisSsid);
+
+    }
+
+    string GetThisUserData(string data, string index)
+    {
+        string value = data.Substring(data.IndexOf(index)+index.Length);
+        if (value.Contains("|"))
+        {
+            value = value.Remove(value.IndexOf("|"));
+        }
+        return value;
+    }
+
+
+
+    void SetText(string name, string course, string ssid)
+    {
+        nameObject = homePage.transform.Find("Info/Name");
+        courseObject = homePage.transform.Find("Info/Course");
+        ssidObject = homePage.transform.Find("Info/SSID");
+
+        NameText = nameObject.GetComponent<TextMeshProUGUI>();
+        CourseText = courseObject.GetComponent<TextMeshProUGUI>();
+        SSIDText = ssidObject.GetComponent<TextMeshProUGUI>();
+
+        NameText.text = "Hi " + name;
+        CourseText.text = "Course: " + course;
+        SSIDText.text = "SSID: " + ssid;
+
     }
 }
