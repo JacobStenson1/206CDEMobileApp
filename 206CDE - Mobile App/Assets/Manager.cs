@@ -140,7 +140,7 @@ public class Manager : MonoBehaviour
         SSIDText = ssidObject.GetComponent<TextMeshProUGUI>();
 
         NameText.text = "Hi " + name;
-        CourseText.text = "Course: " + course;
+        CourseText.text = course;
         SSIDText.text = "SSID: " + ssid;
 
     }
