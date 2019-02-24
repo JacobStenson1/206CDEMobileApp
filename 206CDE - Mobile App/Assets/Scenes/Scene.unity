@@ -171,7 +171,7 @@ RectTransform:
   m_GameObject: {fileID: 105554414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.014925552}
-  m_LocalScale: {x: 0.017399998, y: 0.023707498, z: 0.017399998}
+  m_LocalScale: {x: 0.0171825, y: 0.022818467, z: 0.017399998}
   m_Children: []
   m_Father: {fileID: 680778757}
   m_RootOrder: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Total Lectures / seminars:'
+  m_text: 'Total Sessions:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -270,10 +270,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -0.99634326, w: 0}
   m_textInfo:
     textComponent: {fileID: 105554416}
-    characterCount: 26
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -363,7 +363,7 @@ RectTransform:
   m_GameObject: {fileID: 184151763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.014925552}
-  m_LocalScale: {x: 0.017399998, y: 0.023707498, z: 0.017399998}
+  m_LocalScale: {x: 0.0171825, y: 0.022818467, z: 0.017399998}
   m_Children: []
   m_Father: {fileID: 680778757}
   m_RootOrder: 2
@@ -671,7 +671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &310088619
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,7 +1538,7 @@ RectTransform:
   m_GameObject: {fileID: 451613928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.014925552}
-  m_LocalScale: {x: 0.017399998, y: 0.023707498, z: 0.017399998}
+  m_LocalScale: {x: 0.0171825, y: 0.022818467, z: 0.017399998}
   m_Children: []
   m_Father: {fileID: 680778757}
   m_RootOrder: 1
@@ -3378,7 +3378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &977619377
 Transform:
   m_ObjectHideFlags: 0
@@ -4585,7 +4585,7 @@ RectTransform:
   m_GameObject: {fileID: 1530043949}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.014931187}
-  m_LocalScale: {x: 0.017399998, y: 0.023707498, z: 0.017399998}
+  m_LocalScale: {x: 0.0171825, y: 0.022818467, z: 0.017399998}
   m_Children: []
   m_Father: {fileID: 680778757}
   m_RootOrder: 3

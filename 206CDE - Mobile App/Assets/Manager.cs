@@ -10,7 +10,13 @@ public class Manager : MonoBehaviour
     public GameObject attendancePage;
     public GameObject reportLostStickerPage;
 
+    TextMeshProUGUI usernameEntered;
+    TextMeshProUGUI passwordEntered;
+
     public GameObject buttonsParent;
+
+    public string usernameEnteredText;
+    public string passwordEnteredText;
 
     GameObject currentGameObject;
     bool loginCreds;
@@ -52,6 +58,8 @@ public class Manager : MonoBehaviour
     {
         loginCreds = true;
 
+        GetEnteredData();
+
 
         // If the users entered stuff is right then...
         if (loginCreds == true)
@@ -63,6 +71,18 @@ public class Manager : MonoBehaviour
             buttonsParent.SetActive(true);
         }
         
+    }
+
+    void GetEnteredData()
+    {
+        Transform usernameObject;
+        Transform passwordObject;
+
+        usernameObject = loginPage.transform.Find("Info/EnterUsername");
+        passwordObject = loginPage.transform.Find("Info/EnterPassword");
+
+        usernameEnteredText = usernameObject.GetComponent<TMP_InputField>().text;
+        passwordEnteredText = passwordObject.GetComponent<TMP_InputField>().text;
     }
 
     public void HomepageButton()
@@ -103,6 +123,8 @@ public class Manager : MonoBehaviour
         users = userDataString.Split(';');
         
         Debug.Log(GetThisUserData(users[0], "Class_ID:"));
+
+        //Cycle through the users till you find the user with the same username as the login.
 
         UserNumber = 0;
 
