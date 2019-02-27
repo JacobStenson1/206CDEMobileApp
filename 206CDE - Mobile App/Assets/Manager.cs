@@ -9,11 +9,13 @@ public class Manager : MonoBehaviour
     public GameObject loginPage;
     public GameObject attendancePage;
     public GameObject reportLostStickerPage;
+    public GameObject incorrectCredentials;
 
     TextMeshProUGUI usernameEntered;
     TextMeshProUGUI passwordEntered;
 
     public GameObject buttonsParent;
+
 
     public string usernameEnteredText;
     public string passwordEnteredText;
@@ -22,6 +24,8 @@ public class Manager : MonoBehaviour
     bool loginCreds;
 
     public string[] users;
+    public string[] usersLoginData;
+
     string thisFirstName;
     string thisSurname;
     string thisCourse;
@@ -38,6 +42,9 @@ public class Manager : MonoBehaviour
     Transform courseObject;
     Transform ssidObject;
 
+    string usernameCheck;
+    string passwordCheck;
+
 
     // - - //
 
@@ -51,24 +58,31 @@ public class Manager : MonoBehaviour
         currentGameObject = loginPage;
 
         StartCoroutine(LoadData());
+        StartCoroutine(LoadLoginData());
     }
+
+
 
     // Check to see if the user's credentials are correct
     public void Login()
     {
-        loginCreds = true;
 
         GetEnteredData();
 
-
         // If the users entered stuff is right then...
-        if (loginCreds == true)
+        if (loginCheck())
         {
+            incorrectCredentials.SetActive(false);
+
             currentGameObject.SetActive(false);
             homePage.SetActive(true);
             currentGameObject = homePage;
 
             buttonsParent.SetActive(true);
+        }
+        else
+        {
+            incorrectCredentials.SetActive(true);
         }
         
     }
@@ -83,6 +97,52 @@ public class Manager : MonoBehaviour
 
         usernameEnteredText = usernameObject.GetComponent<TMP_InputField>().text;
         passwordEnteredText = passwordObject.GetComponent<TMP_InputField>().text;
+
+        // Do check on the vars above
+
+
+    }
+
+    bool loginCheck()
+    {
+        bool usernameCheckBool = false;
+        bool passwordCheckBool = false;
+        
+
+        Debug.Log(usernameEnteredText);
+        Debug.Log(passwordEnteredText);
+
+        //Gets each of the usernames of each user
+        for (int i = 0; i < (usersLoginData.Length-1); i++)
+        {
+            usernameCheck = GetThisUserData(usersLoginData[i], "Username:");
+            passwordCheck = GetThisUserData(usersLoginData[i], "Password:");
+
+            if(usernameEnteredText == usernameCheck)
+            {
+                usernameCheckBool = true;
+            }
+            else
+            {
+                usernameCheckBool = false;
+            }
+
+            if(passwordEnteredText == passwordCheck)
+            {
+                passwordCheckBool = true;
+            }
+            else
+            {
+                passwordCheckBool = false;
+            }
+            if (passwordCheckBool && usernameCheckBool)
+            {
+                return true;
+            }
+        }
+        return false;
+
+        
     }
 
     public void HomepageButton()
@@ -112,6 +172,19 @@ public class Manager : MonoBehaviour
         currentGameObject = reportLostStickerPage;
     }
 
+    IEnumerator LoadLoginData()
+    {
+        WWW userLoginData = new WWW("http://localhost/realworldproject/logindata.php");
+        yield return userLoginData;
+
+        string userLoginDataString = userLoginData.text;
+
+        //Debug.Log(userLoginDataString);
+        usersLoginData = userLoginDataString.Split(';');
+
+        //Debug.Log(GetThisUserData(usersLoginData[0], "Class_ID:"));
+    }
+
     IEnumerator LoadData()
     {
         WWW userData = new WWW("http://localhost/realworldproject/userdata.php");
@@ -119,10 +192,10 @@ public class Manager : MonoBehaviour
 
         string userDataString = userData.text;
 
-        Debug.Log(userDataString);
+        //Debug.Log(userDataString);
         users = userDataString.Split(';');
         
-        Debug.Log(GetThisUserData(users[0], "Class_ID:"));
+        //Debug.Log(GetThisUserData(users[0], "Class_ID:"));
 
         //Cycle through the users till you find the user with the same username as the login.
 
